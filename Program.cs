@@ -2,6 +2,8 @@ using AccountMicroservice.AsyncDataServices.Implementations;
 using AccountMicroservice.AsyncDataServices.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using ProductMicroservice.Data;
+using ProductMicroservice.Data.Interfaces;
+using ProductMicroservice.Data.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 ConfigurationManager configuration = builder.Configuration;
@@ -16,8 +18,16 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<IMessageBusClient, MessageBusClient>();
+builder.Services.AddScoped<IProductRepo, ProductRepo>();
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var dbContext = services.GetRequiredService<AppDbContext>();
+    dbContext.Database.Migrate();
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
