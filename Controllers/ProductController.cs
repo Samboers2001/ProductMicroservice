@@ -19,6 +19,13 @@ namespace ProductMicroservice.Controllers
             _messageBus = messageBus;
         }
 
+        [HttpGet]
+        public ActionResult<IEnumerable<Product>> GetAllProducts()
+        {
+            var products = _repository.GetAllProducts();
+            return Ok(products);
+        }
+
         [HttpPost]
         [Route("create")]
         public ActionResult<Product> CreateProduct(Product model)

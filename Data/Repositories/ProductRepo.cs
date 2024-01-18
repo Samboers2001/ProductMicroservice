@@ -23,6 +23,11 @@ namespace ProductMicroservice.Data.Repositories
             _context.SaveChanges();
         }
 
+        public IEnumerable<Product> GetAllProducts()
+        {
+            return _context.Products.ToList();
+        }
+
         public async Task<bool> SaveChangesAsync()
         {
             return await _context.SaveChangesAsync() >= 0;
