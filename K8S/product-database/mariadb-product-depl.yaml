@@ -49,15 +49,15 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: mariadb-product-nodeport
+  name: mariadb-product-loadbalancer
   namespace: ordering-system
 spec:
-  type: NodePort
+  type: LoadBalancer
   selector:
     app: mariadb-product
   ports:
   - protocol: TCP
     port: 3308
     targetPort: 3306
-    nodePort: 31113
+
 
