@@ -49,20 +49,22 @@ namespace ProductMicroservice.Controllers
         }
 
         [HttpPut]
-        [Route("edit")]
-        public ActionResult EditProduct(Product model)
+        [Route("edit/{id}")]
+        public ActionResult<Product> EditProduct(int id, string name, decimal price, string description)
         {
-            Product product = new Product
+            Product product = _repository.GetProductById(id);
+            if (product == null)
             {
-                Id = model.Id,
-                Name = model.Name,
-                Price = model.Price,
-                Description = model.Description
-            };
+                return NotFound();
+            }
+            product.Name = name;
+            product.Price = price;
+            product.Description = description;
             _repository.EditProduct(product);
             _repository.SaveChangesAsync();
-            return Ok(new { message = "Product edited successfully", product });
+            return Ok(new { message = "Product updated successfully", product });
         }
+
 
         [HttpDelete]
         [Route("delete/{id}")]
