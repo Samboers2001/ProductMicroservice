@@ -79,6 +79,12 @@ namespace ProductMicroservice.Controllers
             {
                 return NotFound();
             }
+
+            ProductDeletedEvent productDeletedEvent = new ProductDeletedEvent
+            {
+                ExternalProductId = product.Id
+            };
+            _messageBus.PublishMessage(productDeletedEvent, "product.deleted");
             _repository.DeleteProduct(product);
             _repository.SaveChangesAsync();
             return Ok(new { message = "Product deleted successfully", product });
