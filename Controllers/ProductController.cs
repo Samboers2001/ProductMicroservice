@@ -47,5 +47,35 @@ namespace ProductMicroservice.Controllers
             _messageBus.PublishMessage(productCreatedEvent, "product.created");
             return Ok(new { message = "Product created successfully", product });
         }
+
+        [HttpPut]
+        [Route("edit")]
+        public ActionResult EditProduct(Product model)
+        {
+            Product product = new Product
+            {
+                Id = model.Id,
+                Name = model.Name,
+                Price = model.Price,
+                Description = model.Description
+            };
+            _repository.EditProduct(product);
+            _repository.SaveChangesAsync();
+            return Ok(new { message = "Product edited successfully", product });
+        }
+
+        [HttpDelete]
+        [Route("delete/{id}")]
+        public ActionResult DeleteProduct(int id)
+        {
+            Product product = _repository.GetProductById(id);
+            if (product == null)
+            {
+                return NotFound();
+            }
+            _repository.DeleteProduct(product);
+            _repository.SaveChangesAsync();
+            return Ok(new { message = "Product deleted successfully", product });
+        }
     }
 }
