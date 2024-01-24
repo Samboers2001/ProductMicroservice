@@ -1,5 +1,5 @@
-using AccountMicroservice.AsyncDataServices.Implementations;
-using AccountMicroservice.AsyncDataServices.Interfaces;
+using ProductMicroservice.AsyncDataServices.Implementations;
+using ProductMicroservice.AsyncDataServices.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using ProductMicroservice.Data;
 using ProductMicroservice.Data.Interfaces;
