@@ -50,20 +50,25 @@ namespace ProductMicroservice.Controllers
 
         [HttpPut]
         [Route("edit/{id}")]
-        public ActionResult<Product> EditProduct(int id, string name, decimal price, string description)
+        public ActionResult<Product> EditProduct(int id, [FromBody] Product updatedProduct)
         {
             Product product = _repository.GetProductById(id);
             if (product == null)
             {
                 return NotFound();
             }
-            product.Name = name;
-            product.Price = price;
-            product.Description = description;
+
+            // Update the fields based on the received product object
+            product.Name = updatedProduct.Name;
+            product.Price = updatedProduct.Price;
+            product.Description = updatedProduct.Description;
+
             _repository.EditProduct(product);
             _repository.SaveChangesAsync();
+
             return Ok(new { message = "Product updated successfully", product });
         }
+
 
 
         [HttpDelete]
