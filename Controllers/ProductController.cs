@@ -58,7 +58,6 @@ namespace ProductMicroservice.Controllers
                 return NotFound();
             }
 
-            // Update the fields based on the received product object
             product.Name = updatedProduct.Name;
             product.Price = updatedProduct.Price;
             product.Description = updatedProduct.Description;
