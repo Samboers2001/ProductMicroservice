@@ -1,4 +1,4 @@
-namespace AccountMicroservice.AsyncDataServices.Interfaces
+namespace ProductMicroservice.AsyncDataServices.Interfaces
 {
     public interface IMessageBusClient
     {

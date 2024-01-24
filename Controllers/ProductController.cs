@@ -1,4 +1,4 @@
-using AccountMicroservice.AsyncDataServices.Interfaces;
+using ProductMicroservice.AsyncDataServices.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using ProductMicroservice.Data.Interfaces;
 using ProductMicroservice.MessageBusEvents;

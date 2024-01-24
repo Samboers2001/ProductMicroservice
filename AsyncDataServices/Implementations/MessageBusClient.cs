@@ -1,9 +1,9 @@
 using System.Text;
 using System.Text.Json;
-using AccountMicroservice.AsyncDataServices.Interfaces;
+using ProductMicroservice.AsyncDataServices.Interfaces;
 using RabbitMQ.Client;
 
-namespace AccountMicroservice.AsyncDataServices.Implementations
+namespace ProductMicroservice.AsyncDataServices.Implementations
 {
     public class MessageBusClient : IMessageBusClient
     {
